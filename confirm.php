@@ -1,0 +1,6 @@
+<?php
+session_start(); require_once "config.php";
+if(!isset($_SESSION["user"])){header("Location: login.php");exit;}
+$id=(int)($_GET["id"]??0); $p=$pdo?$pdo->prepare("SELECT * FROM products WHERE id=?"):null; if($p){$p->execute([$id]);$p=$p->fetch();}
+?><!doctype html><html lang="th"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ยืนยันการสั่งซื้อ</title><link rel="stylesheet" href="assets/style.css"></head><body>
+<header class="top"><a class="brand" href="index.php"><img src="assets/logo.svg"></a></header><main><section class="panel confirm"><h2>ยืนยันการสั่งซื้อ</h2><h3><?=htmlspecialchars($p["name"]??"สินค้า")?></h3><p>ราคา: <?=number_format($p["price"]??0,2)?> บาท</p><label>เลือกวัน/เดือน/ปี <input type="date" id="date"></label><label>เลือกชั่วโมง <input type="time" id="time"></label><button class="buy" onclick="alert('ตัวอย่างระบบ: เชื่อมระบบชำระเงินและบันทึกออเดอร์ในขั้นตอนถัดไป')">ยืนยันสั่งซื้อ</button></section></main></body></html>
