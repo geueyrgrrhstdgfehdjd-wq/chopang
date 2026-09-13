@@ -1,7 +1,0 @@
-kind: wasmer.io/App.v0
-name: neon-shop
-owner: YOUR_WASMER_USERNAME
-package: .
-capabilities:
-  database:
-    engine: mysql
